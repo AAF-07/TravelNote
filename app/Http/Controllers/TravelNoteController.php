@@ -25,9 +25,7 @@ class TravelNoteController extends Controller
     public function logout(){
         return redirect()->route('config.show')->with('success', 'logout berhasil');
     }
-    public function ShowRegis(){
-        return view('config.regis');
-    }
+
 
     public function index(){
         $config = User::all();

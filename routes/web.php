@@ -6,6 +6,8 @@ use App\Http\Controllers\TravelNoteController;
 Route::get('/', [TravelNoteController::class, 'ShowLogin'])->name('config.show');
 Route::post('/', [TravelNoteController::class, 'login']);
 
+Route::post('/logout', [TravelNoteController::class, 'logout'])->name('config.logout');
+
 Route::get('/travel', [TravelNoteController::class, 'index'])->name('travel.index');
 Route::get('/travel/create', [TravelNoteController::class, 'create'])->name('travel.create');
 Route::post('/travel', [TravelNoteController::class, 'store'])->name('travel.store');

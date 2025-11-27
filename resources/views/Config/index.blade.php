@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<form method="post" action="{{ url('/') }}">
+<form method="post" action="{{ url('/') }}" class="items-center margin-top-10">
     @csrf
     <div>
         <label>nik</label>

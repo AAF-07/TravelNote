@@ -2,10 +2,18 @@
 @section('content')
 <div>
     @foreach ($config as $config)
-    <div>user: {{ $config['nik'] }} - {{ $config['name'] }}</div>
+    <div class="flex justify-between items-center mb-3">
+        <div>user: {{ $config['nik'] }} - {{ $config['name'] }}</div>
+        <form action="{{ route('config.logout') }}" method="POST" >
+            @csrf
+            <button type="submit" class="px-4 py-2 border bg-red-600 text-white">Logout</button>
+        </form>
+    </div>
     @endforeach
-    <a href="{{ route('travel.create') }}" class="inline-block mt-3 mb-3 border px-2 py-1">tambah catatan</a>
-    
+    <div class="flex">
+        <a href="{{ route('travel.create') }}" class="inline-block mt-3 mb-3 border px-2 py-1 ml-0">tambah catatan</a>
+    </div>
+
     <table class="w-full border">
         <thead><tr><th>id</th><th>tanggal</th><th>lokasi</th><th>keterangan</th><th>aksi</th></tr></thead>
         <tbody>
