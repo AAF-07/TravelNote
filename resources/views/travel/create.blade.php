@@ -4,21 +4,21 @@
 
 <h2 class="text-xl font-semibold mb-4">tambah catatan perjalanan</h2>
 
-<form method="post" action="{{ route('travel.store') }}">
+<form method="post" action="{{ route('travel.store') }}" >
     @csrf
 
-    <div class="mb-3">
-        <label class="block mb-1">tanggal</label>
+    <div class="mb-3 ">
+        <div class="flex"><label class="block mb-1 mr-0">tanggal</label></div>
         <input type="date" name="date" class="border p-2 w-full" required>
     </div>
 
     <div class="mb-3">
-        <label class="block mb-1">lokasi</label>
+        <div class="flex"><label class="block mb-1 mr-0">lokasi</label></div>
         <input type="text" name="location" class="border p-2 w-full" required>
     </div>
 
     <div class="mb-3">
-        <label class="block mb-1">keterangan</label>
+        <div class="flex"><label class="block mb-1 mr-0">keterangan</label></div>
         <textarea name="description" class="border p-2 w-full" rows="3" required></textarea>
     </div>
 
