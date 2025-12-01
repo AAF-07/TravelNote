@@ -9,6 +9,7 @@ class TravelNote extends Model
     protected $table = 'travelnote';
 
     protected $fillable = [
+        'user_id',
         'date',
         'location',
         'description',

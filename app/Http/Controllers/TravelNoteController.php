@@ -20,16 +20,45 @@ class TravelNoteController extends Controller
             'nama' => 'required',
         ]);
 
+        $user = User::where('nik', $req->nik)->where('name', $req->nama)->first();
+        if(!$user){
+            return redirect()->route('config.show')->with('error', 'nik atau nama salah');
+        }
+        session()->put('id', $user->id);
+
         return redirect()->route('travel.index')->with('success', 'config disimpan');
     }
     public function logout(){
+        session()->forget('id');
         return redirect()->route('config.show')->with('success', 'logout berhasil');
     }
 
+    public function ShowRegister(){
+        return view('config.register');
+    }
+    public function register(Request $req){
+        $req->validate([
+            'nik'=>'required',
+            'nama'=>'required'
+        ]);
+
+        user::create([
+            'nik'=>$req->nik,
+            'name'=>$req->nama
+        ]);
+
+        return redirect()->route('config.show')->with('success', 'register berhasil');
+    }
 
     public function index(){
-        $config = User::all();
-        $rows = TravelNote::all();
+
+    if (!session()->has('id')) {
+        return redirect()->route('config.show')->with('error', 'silakan login dulu');
+    }
+
+        $id = session()->get('id');
+        $config = User::findOrFail($id);
+        $rows = TravelNote::where('user_id', $id)->get();
         return view('travel.index', compact('config', 'rows'));
     }
 
@@ -44,6 +73,7 @@ class TravelNoteController extends Controller
         ]);
 
         TravelNote::create([
+            'user_id' => session()->get('id'),
             'date' => $req->date,
             'location' => $req->location,
             'description' => $req->description,
