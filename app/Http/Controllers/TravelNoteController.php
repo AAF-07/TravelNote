@@ -58,7 +58,7 @@ class TravelNoteController extends Controller
 
         $id = session()->get('id');
         $config = User::findOrFail($id);
-        $rows = TravelNote::where('user_id', $id)->get();
+        $rows = TravelNote::where('user_id', $id)->orderBy('date', 'desc')->get();
         return view('travel.index', compact('config', 'rows'));
     }
 
