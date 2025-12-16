@@ -118,16 +118,21 @@ class TravelNoteController extends Controller
         $req->validate([
             'photo' => 'required|image|max:2048',
         ]);
-
-        $path = $req->file('photo')->store('photos', 'public');
-
-        // Simpan path foto ke database atau lakukan proses lainnya
+    
         $id = session()->get('id');
-        \App\Models\picture::create([
-            'user_id' => $id,
-            'file_path' => $path,
+        $user = User::findOrFail($id);
+    
+        // hapus foto lama (opsional)
+        if ($user->photo) {
+            Storage::disk('public')->delete($user->photo);
+        }
+    
+        $path = $req->file('photo')->store('profile', 'public');
+    
+        $user->update([
+            'photo' => $path
         ]);
-
-        return redirect()->back()->with('success', 'Foto berhasil diunggah');
+    
+        return back()->with('success', 'foto profil berhasil diupdate');
     }
 }
