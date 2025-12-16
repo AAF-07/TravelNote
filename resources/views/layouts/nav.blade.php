@@ -8,7 +8,24 @@
 <body>
     <div class="flex items-start gap-4 mb-6 max-w-3xl mx-auto mt-20">
         <div>
-            <img src="public/BL.jpeg" alt="logo" class="w-20 h-20 border object-cover">
+            <form id="photoForm"
+                action="{{ route('profile.photo') }}"
+                method="POST"
+                enctype="multipart/form-data">
+
+            @csrf
+
+                <label for="photoInput" class="cursor-pointer">
+                    <img src="{{ $config->photo ? asset('storage/'.$config->photo) : asset('images/default-pp.jpg') }}" class="w-20 h-20 border object-cover">
+                </label>
+            
+                <input type="file"
+                    id="photoInput"
+                    name="photo"
+                    class="hidden"
+                    onchange="document.getElementById('photoForm').submit()">
+            </form>
+
         </div>
         <div >
             <img src="" alt="">

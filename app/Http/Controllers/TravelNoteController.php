@@ -113,4 +113,21 @@ class TravelNoteController extends Controller
 
         return redirect()->route('travel.index')->with('success', 'data berhasil dihapus');
     }
+
+    public function upPhoto(Request $req){
+        $req->validate([
+            'photo' => 'required|image|max:2048',
+        ]);
+
+        $path = $req->file('photo')->store('photos', 'public');
+
+        // Simpan path foto ke database atau lakukan proses lainnya
+        $id = session()->get('id');
+        \App\Models\picture::create([
+            'user_id' => $id,
+            'file_path' => $path,
+        ]);
+
+        return redirect()->back()->with('success', 'Foto berhasil diunggah');
+    }
 }

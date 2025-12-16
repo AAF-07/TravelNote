@@ -20,3 +20,4 @@ Route::post('/travel/{id}/delete', [TravelNoteController::class, 'destroy'])->na
 
 Route::get('/home', [TravelNoteController::class, 'home'])->name('travel.home');
 
+Route::post('/profile/photo', [TravelNoteController::class, 'upPhoto'])->name('profile.photo');
