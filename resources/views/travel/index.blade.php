@@ -1,28 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.nav')
 @section('content')
 <div>
-    <div class="flex justify-between items-center mb-3">
-        <div>user: {{ $config['name'] }}</div>
-        <form action="{{ route('config.logout') }}" method="POST" >
-            @csrf
-            <button type="submit" class="px-4 py-2 border bg-red-600 text-white">Logout</button>
-        </form>
-    </div>
+
     <div class="flex">
         <a href="{{ route('travel.create') }}" class="inline-block mt-3 mb-3 border px-2 py-1 ml-0">tambah catatan</a>
     </div>
 
-    <table class="w-full border">
-        <thead>
+    <table class="w-full border border-gray-200">
+        <thead class="bg-gray-100">
             <tr>
-                <th>Tanggal</th>
-                <th>Lokasi</th>
-                <th>Keterangan</th>
-                <th>Aksi</th>
+                <th class="p-2 border">tanggal</th>
+                <th class="p-2 border">lokasi</th>
+                <th class="p-2 border">keterangan</th>
+                <th class="p-2 border">aksi</th>
             </tr>
         </thead>
         <tbody>
-        @forelse($rows as $r)
+            <tr class="hover:bg-gray-50">
+            @forelse($rows as $r)
             <tr class="border-t text-center">
                 <td>{{ $r['date'] }}</td>
                 <td>{{ $r['location'] }}</td>
@@ -38,6 +33,7 @@
         @empty
             <tr><td colspan="5">belum ada catatan</td></tr>
         @endforelse
+            </tr>
         </tbody>
     </table>
 </div>

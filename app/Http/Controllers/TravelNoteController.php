@@ -26,7 +26,7 @@ class TravelNoteController extends Controller
         }
         session()->put('id', $user->id);
 
-        return redirect()->route('travel.index')->with('success', 'config disimpan');
+        return redirect()->route('travel.home')->with('success', 'config disimpan');
     }
     public function logout(){
         session()->forget('id');
@@ -60,6 +60,11 @@ class TravelNoteController extends Controller
         $config = User::findOrFail($id);
         $rows = TravelNote::where('user_id', $id)->orderBy('date', 'desc')->get();
         return view('travel.index', compact('config', 'rows'));
+    }
+    public function home(){
+        $id = session()->get('id');
+        $config = User::findorfail($id);
+        return view('travel.home', compact('config'));
     }
 
     public function create(){
